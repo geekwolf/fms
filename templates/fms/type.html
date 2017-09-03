@@ -1,0 +1,43 @@
+{% extends 'base/base_site.html' %} 
+{% block css %}
+{{ block.super}}
+<style type="text/css">
+  .form-control-bulk-import {
+    width:200px;
+    display:inline;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="ibox-title">
+  <h5>故障类型</h5>
+</div>
+<div class="ibox-content">
+  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="dataTables_length" id="DataTables_Table_0_length" style="margin-bottom:15px;">
+          <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#editor"><i class="fa fa-plus"></i> 添加类型</button>
+          <input type="text" placeholder="搜索" id="search" class="form-control input-sm">
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+      <thead>
+        <tr role="row">
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >ID</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >故障类型</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >操作</th>
+        </tr>
+      </thead>
+      <tbody id="content">
+      {% include 'fms/type_table.html'%}
+      </tbody>
+    </table>
+{% include 'common/paginator.html'%}
+</div>
+{% include 'fms/fms_modal.html'%}
+{% endblock %}
+{% block javascripts %}
+{{ block.super}}
+{% endblock %}

@@ -1,0 +1,13 @@
+ {% for i in form %}
+<tr>
+    <td>{{ i.id }}</td>
+    <td id="project_name" data-name="{{ i.name }}">{{ i.name }}</td>
+    <td>
+        {% if i.email %} {{i.email}} {% else %} 无 {% endif %}
+    </td>
+    <td>
+        <button id="etn_{{i.id}}" type="button" class="btn btn-xs btn-success btn-edit" data-toggle="modal" data-target="#editor" data-row="{{ i.id }}|{{ i.name }}|{{ i.email }}">编辑</button>
+        <a href="{% url 'contact_del' i.id %}" onclick="return confirm('确认删除角色吗？')" class="btn btn-xs btn-danger status contact_del">删除</a>
+    </td>
+</tr>
+{% endfor %}

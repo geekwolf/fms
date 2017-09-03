@@ -1,0 +1,115 @@
+{% extends 'base/base_site.html' %} 
+{% load accounts_tag %}
+
+{% block css %}
+{{ block.super}}
+<link rel="stylesheet" type="text/css" href="/static/css/plugins/chosen/chosen.css">
+{% endblock%}
+{% block content %}
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>编辑</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="POST" action={% url 'accounts_edit' %}?id={{id}} class="form-horizontal">
+                            {% include 'accounts/user/user_content.html'%}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ block.super}}
+
+<script src="/static/js/plugins/chosen/chosen.jquery.js" type="text/javascript"></script>
+
+<!--chosen control and array contains function-->
+<script type="text/javascript">
+function resetChosen() {
+    var config = {
+        '.chosen-select': {
+            width: "100%"
+        },
+        '.chosen-select-deselect': {
+            allow_single_deselect: true
+        },
+        '.chosen-select-no-single': {
+            disable_search_threshold: 10
+        },
+        '.chosen-select-no-results': {
+            no_results_text: 'Oops, nothing found!'
+        },
+        '.chosen-select-width': {
+            width: "100%"
+        },
+
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+    $('#groups').trigger("chosen:updated");
+}
+
+function reset() {
+        $('#group_name').val("");
+        $('#groups').val("")
+    }
+
+Array.prototype.contains = function(needle) {
+    for (i in this) {
+        if (this[i] == needle) return true;
+    }
+    return false;
+}
+</script>
+
+
+<script type="text/javascript">
+
+var groups = {{ groups | safe}};
+var instance_groups = "{{form.groups |safe}}".split(',');
+
+
+if (instance_groups !=""){
+  $.each(groups,function(key,value){
+      var  obj = document.getElementById("groups");
+      var  op = new Option(value[1],value[0])
+      if(instance_groups.contains(value[1])){
+          op.selected = true;
+      }
+      obj.add(op);
+  });
+}else if (instance_groups == "") {
+        
+        $.each(groups,function(key,value){
+                var  obj = document.getElementById("groups");
+                var  op = new Option(value[1],value[0])
+                obj.add(op);
+        });
+}
+resetChosen();
+
+</script>
+
+{% endblock %}

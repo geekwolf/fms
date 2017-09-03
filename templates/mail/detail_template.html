@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link href="http://192.168.101.89:1111/static/css/code.css" rel="stylesheet">
+	<title>故障报告</title>
+</head>
+<body>
+<div style="width:900px;margin:0 auto;position:relative;">
+	<table width="1024px" cellspacing="0" border="0" cellpadding="0">
+		<tr>
+		  <td style="position:relative;">
+			<table width="100%" cellspacing="0" border="0" cellpadding="0" style="background:#3cbde5;">
+					<tr>
+						<td height="18"></td>
+					</tr>
+					<tr>
+						<td style="font-size:20px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;line-height:1.6;color:#fff;text-align:center;">【故障报告】<a style="text-decoration:none;color:white;" href="http://fms.wow/fms/detail/{{ content.id }}">{{ content.title }}</a></td>
+					</tr>
+					<tr>
+						<td style="font-size:14px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;line-height:1.6;color:#fff;text-align:center;">创建时间:{{ content.ctime }}</td>
+					</tr>
+					<tr>
+						<td height="20"></td>
+					</tr>
+			</table></td>
+		</tr>
+		<tr>
+			<td style="background:#f8f8f8;">
+				<table width="100%" cellspacing="0" border="0" cellpadding="0">
+					<tr>
+						<td width="20"></td>
+						<td>
+							<table width="100%" cellspacing="0" border="0" cellpadding="0">
+								<tr>
+									<td>
+										<table width="100%" cellspacing="0" border="0" cellpadding="0">
+											<tr>
+												<td width="130" height="20"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								  <tr>
+									<td>
+										<table width="100%" cellspacing="0" border="0" cellpadding="0">
+											<tr>
+												<td width="5" style="background:#3cbde5;"></td>
+												<td width="10"></td>
+												<td style="font-size:16px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;"><strong>故障概述</strong></td>
+												<td align="right">
+													<table cellspacing="0" border="0" cellpadding="5">
+													</table>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+
+								<tr><td height="5"></td></tr>
+
+								<tr>
+									<td style="background:#fff;">
+										<table width="840" border="0" cellpadding="0" style="table-layout:fixed;border-collapse:collapse;margin:20px 10px;overflow:hidden;border:none;">
+											<tr>
+											  <th width="220"  style="font-size:15px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;"><strong>故障时间</strong></th>
+											  <th width="70" style="font-size:15px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;"><strong>影响项目</strong></th>
+											  <th width="70" style="font-size:15px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;"><strong>故障等级</strong></th>
+											  <th width="70" style="font-size:15px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;"><strong>故障类型</strong></th>
+											  <th width="70" style="font-size:15px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;"><strong>故障状态</strong></th>
+											  <th width="70" style="font-size:15px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;"><strong>主导改进方</strong></th>
+												<th width="70" style="font-size:15px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;"><strong>故障总时长</strong></th>
+											</tr>
+											<tr>
+												
+												<td style="vertical-align:top;font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#3cbde5;text-align:left;text-decoration:none;word-wrap:break-word;word-break: break-all;">
+														{{content.start_time|date:"Y-m-d H:i"}}~{{content.end_time|date:"Y-m-d H:i"}}
+												</td>
+
+												<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;vertical-align:top;text-align:left;">
+													{{content.project}}
+												</td>
+
+												<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#FF0000;vertical-align:top;text-align:left;">
+													{{content.get_level_display}}
+												</td>
+
+												<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;vertical-align:top;text-align:left;">
+													{% if content.type   %}{{ content.type }}{% else %}无{% endif %}                                                
+													</td>
+												<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#6fb501;vertical-align:top;text-align:left;">
+																										{{content.get_status_display}}
+																									</td>
+												<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#3cbde5;vertical-align:top;text-align:left;">
+																										{{content.get_improve_display}}
+																									</td>
+											  
+												<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;vertical-align:top;text-align:left;">
+																										{{ content.time }}
+												</td>
+											</tr>
+								</table>
+									</td>
+								</tr>
+								<tr><td height="25"></td></tr>
+								<tr>
+									<td>
+										<table width="100%" cellspacing="0" border="0" cellpadding="0">
+											<tr>
+												<td width="5" style="background:#3cbde5;"></td>
+												<td width="10"></td>
+												<td style="font-size:16px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;"><strong>故障影响</strong></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+
+								<tr><td height="5"></td></tr>
+
+								<tr>
+									<td style="background:#fff;padding-left:25px;padding-right:25px">
+										<table width="950" border="0" cellpadding="0" style="table-layout:fixed;border-collapse:collapse;overflow:hidden;border:none;">
+											<tr>
+												<th colspan="2" style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">
+  												           {% spaceless %}
+            													{{content.effect|linebreaks}}
+            											   {% endspaceless %}
+
+												</th>
+											</tr>
+
+										</table>
+									</td>
+								</tr>
+
+								<tr><td height="25"></td></tr>
+
+								<tr>
+									<td>
+										<table width="100%" cellspacing="0" border="0" cellpadding="0">
+											<tr>
+												<td width="5" style="background:#3cbde5;"></td>
+												<td width="10"></td>
+												<td style="font-size:16px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;"><strong>故障分析</strong></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+
+								<tr><td height="5"></td></tr>
+
+								<tr>
+									<td style="background:#fff;padding-left:25px;padding-right:25px" >
+										<table width="950" border="0" cellpadding="0" style="table-layout:fixed;border-collapse:collapse;overflow:hidden;border:none;">
+											<tr>
+												<th colspan="2" style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:2px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">
+												           {% spaceless %}
+            													{{content.content|markdown|linebreaks}}
+            											   {% endspaceless %}
+											    </th>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr><td height="25"></td></tr>
+
+								<tr>
+								<td>
+										<table width="100%" cellspacing="0" border="0" cellpadding="0">
+											<tr>
+												<td width="5" style="background:#3cbde5;"></td>
+												<td width="10"></td>
+												<td style="font-size:16px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;"><strong>故障原因</strong></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+
+								<tr><td height="5"></td></tr>
+
+								<tr>
+									<td style="background:#fff;padding-left:25px;padding-right:25px">
+										<table width="950" border="0" cellpadding="0" style="table-layout:fixed;border-collapse:collapse;overflow:hidden;border:none;">
+											<tr>
+												<th colspan="2" style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:2px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">
+												           {% spaceless %}
+            													{{content.reasons|linebreaks}}
+            											   {% endspaceless %}
+
+
+												</th>
+											</tr>
+
+										</table>
+									</td>
+								</tr>
+								<tr><td height="25"></td></tr>
+
+								<tr>
+								<td>
+										<table width="100%" cellspacing="0" border="0" cellpadding="0">
+											<tr>
+												<td width="5" style="background:#3cbde5;"></td>
+												<td width="10"></td>
+												<td style="font-size:16px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;color:#222;"><strong>解决方案</strong></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+
+								<tr><td height="5"></td></tr>
+
+								<tr>
+									<td style="background:#fff;padding-left:25px;padding-right:25px">
+										<table width="950" border="0" cellpadding="0" style="table-layout:fixed;border-collapse:collapse;overflow:hidden;border:none;">
+											<tr>
+												<th colspan="2" style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">
+            													{% spaceless %}
+																		{{content.solution|linebreaks}}
+																{% endspaceless %}
+												</th>
+											</tr>
+
+										</table>
+									</td>
+								</tr>
+								<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">故障详情:  <a href="http://fms.wow/fms/detail/{{ content.id }}">http://fms.wow/fms/detail/{{ content.id }}</a>  历史故障统计: <a href="http://fms.wow/dashboard/">http://fms.wow/dashboard/</a></td>
+
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td
+		</tr>
+</table>
+</div>
+</body>
+
+</html>
+
+

@@ -1,0 +1,19 @@
+        {% for i in content %}
+        <tr class="gradeA odd" role="row">
+          <td class="sorting_1">{{ i.id }}</td>
+          <td><a href="/fms/detail/{{ i.id }}">{{ i.title }}</a></td>
+          <td>{{ i.get_level_display }}</td>
+          <td class="center">{{ i.type }}</td>
+           <td class="center">{{ i.project }}</td>
+          <td class="center">{{ i.get_improve_display }}</td>
+          <td class="center">{{ i.time }}</td>
+          <td class="center">{{ i.get_status_display }}</td>
+          <td class="center">{{ i.author.fullname }}</td>
+          <td class="center">{{ i.ctime }}</td>
+
+          <td class="center">
+           <a href=/fms/edit?id={{i.id}}  class="btn btn-xs btn-success btn-edit">编辑</a>
+           <a class="btn btn-xs btn-primary btn-email" data-toggle="modal" data-target="#editor" data-row={{ i.id }}|{{ i.author.fullname }}>通知</a>
+          </td>
+        </tr>
+        {% endfor %}

@@ -1,0 +1,201 @@
+{% extends 'base/base_site.html' %}
+{% block css %}
+{{ block.super}}
+<link href="/static/js/plugins/editormd/lib/katex/katex.min.css" rel="stylesheet">
+<style media="screen">
+.m-table{
+    border-collapse:collapse;
+    margin: 0 auto;
+    width: 80%;
+}
+.m-table td,th{
+    border:0px solid #cccccc;
+    padding: 5px;
+    font-size: 14px;
+
+}
+.ibox-tools-new{
+    float: right;
+    margin-top: -30px;
+}
+.alert{
+    padding:11px;
+    background-color: #f5f5f5;
+}
+.ibox-content{
+    padding-bottom:5%;
+    min-width: 800px;
+}
+.ibox-title{
+    min-width: 800px;
+}
+
+</style>
+{% endblock%}
+
+{% block content %}
+<div class="ibox-title">
+    <h3 style="margin-top:0px">故障报告: {{ content.title }}</h3>
+    {% if request.user == content.author  or request.user.is_superuser %}
+        <div class="ibox-tools-new">
+            <a href=/fms/edit?id={{content.id}} class="btn btn-xs btn-success btn-edit">编辑</a>
+        </div>
+    {% endif %}
+</div>
+
+<div class="ibox-content">
+    {% if content %}
+    <div class="alert alert-info">
+         <span class="alert-link">故障概述</span>
+    </div>
+
+    <table class="m-table">
+        <tbody>
+            <tr>
+                <td><b>故障时间:</b></td>
+                <td>{{content.start_time|date:"Y-m-d H:i"}}~{{content.end_time|date:"Y-m-d H:i"}}</td>
+
+                <td><b>影响项目:</b></td>
+                <td>{{content.project}}</td>
+
+                <td><b>故障状态:</b></td>
+                <td>{{content.get_status_display}}</td>
+            </tr>
+            <tr>
+                <td><b>故障等级:</b></td>
+                <td>{{content.get_level_display}}</td>
+                <td><b>创建者:</b></td>
+                <td>{{ content.author.fullname }}</td>
+                <td><b>主导改进方:</b></td>
+                <td>{{content.get_improve_display}}</td>
+            </tr>
+            <tr>
+                <td><b>故障类型:</b></td>
+                <td>
+                {% if content.type   %}
+                    {{ content.type }}
+                {% else %}
+                    无  
+                {% endif %}
+                </td>
+                <td><b>影响时间:</b></td>
+                <td>{{ content.time }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-info" style="margin-top:20px">
+         <span class="alert-link">故障影响</span>
+    </div>
+
+    <table class="m-table">
+        <tbody>
+                <tr>
+                <td>
+                    <div id="editormd-effect">
+                        <textarea style="display:none;">{{content.effect}}</textarea>
+                    </div>
+
+                </td>
+                </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-info" style="margin-top:20px">
+         <span class="alert-link">故障分析</span>
+    </div>
+
+    <table class="m-table">
+        <tbody>
+                <tr>
+                <td>
+                    <div id="editormd-content">
+                        <textarea  style="display:none;">{{content.content}}</textarea>
+                    </div>
+                </td>
+                </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-info" style="margin-top:20px">
+         <span class="alert-link">故障原因</span>
+    </div>
+
+    <table class="m-table">
+        <tbody>
+                <tr>
+                <td>
+                    <div id="editormd-reasons">
+                        <textarea style="display:none;">{{content.reasons}}</textarea>
+                    </div>
+                </td>
+                </tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-info" style="margin-top:20px,margin-bottom:20px">
+         <span class="alert-link">解决方案</span>
+    </div>
+
+    <table class="m-table">
+        <tbody>
+                <tr>
+
+                <td>
+                    <div id="editormd-solution">
+                        <textarea style="display:none;">{{content.solution}}</textarea>
+                    </div>
+                </td>                
+
+                </tr>
+        </tbody>
+    </table>
+
+    {% else %}
+    <p style="text-align:center;color:#FF0000;font-weight:bold;">{{ error }}</p>
+    {% endif %} 
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ block.super}}
+<script src="/static/js/plugins/editormd/lib/marked.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/prettify.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/raphael.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/underscore.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/sequence-diagram.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/flowchart.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/jquery.flowchart.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/katex/katex.min.js"></script>
+<script src="/static/js/plugins/editormd/editormd.min.js"></script>
+
+<script type="text/javascript">
+    var  elements = ['#effect','#reasons','#solution'];
+    $.each(elements,function(k,v){
+        var temp = $(v).text().replace(/\n/g, '<br/>');
+        $(v).html(temp);
+    });
+
+</script>
+
+<script type="text/javascript">
+
+  $(function() {
+      var id = ["editormd-effect","editormd-reasons","editormd-content","editormd-solution"];
+      $.each(id,function(k,v){
+          var EditormdView = editormd.markdownToHTML(v, {
+          htmlDecode      : "style,script,iframe",  
+          emoji           : true,
+          taskList        : true,
+          tex             : true,  // 默认不解析
+          flowChart       : true,  // 默认不解析
+          sequenceDiagram : true,  // 默认不解析
+          path    : "/static/js/plugins/editormd/lib/",
+          autoLoadKaTeX: !1,
+            });
+         }); 
+      });
+
+</script>
+{% endblock %}

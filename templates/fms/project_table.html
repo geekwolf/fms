@@ -1,0 +1,16 @@
+    {% for i in content %}
+    <tr class="gradeA odd" role="row">
+        <td>{{ i.id }}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.description }}</td>
+
+
+        <td class="center">
+            <!--<a href="/cmdb/server/detail/{{ i.uuid }}" class="btn btn-xs btn-primary">详情</a>-->
+            <a href="{% url 'project_edit' %}?id={{ i.id }}" class="btn btn-xs btn-success btn-edit" data-toggle="modal" data-target="#editor" data-row="{{ i.id }}|{{ i.name }}|{{ i.description }}">编辑</a>
+            <a href="/accounts/project/del/{{ i.id }}" class="btn btn-xs btn-danger"  onclick="return confirm('确认删除吗？')">删除</a>
+
+        </td>
+    </tr>
+
+    {% endfor %}

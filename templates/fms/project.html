@@ -1,0 +1,98 @@
+{% extends 'base/base_site.html' %} 
+{% block css %}
+{{ block.super}}
+<style type="text/css">
+  .form-control-bulk-import {
+    width:200px;
+    display:inline;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="ibox-title">
+  <h5>项目管理</h5>
+</div>
+<div class="ibox-content">
+  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="dataTables_length" id="DataTables_Table_0_length" style="margin-bottom:15px;">
+          <button class="btn btn-sm btn-success btn-add" data-toggle="modal" data-target="#editor"><i class="fa fa-plus"></i> 添加项目</button>
+          <input type="text" placeholder="搜索" id="search" class="form-control input-sm">
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+      <thead>
+        <tr role="row">
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >ID</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >项目名称</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >项目描述</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >操作</th>
+        </tr>
+      </thead>
+      <tbody id="content">
+      {% include 'fms/project_table.html'%}
+      </tbody>
+    </table>
+{% include 'common/paginator.html'%}
+</div>
+{% include 'fms/project_modal.html'%}
+{% endblock %}
+{% block javascripts %}
+{{ block.super}}
+
+<script type="text/javascript">
+function reset() {
+        $('#name').val("");
+        $('#description').val("")
+    }
+
+    $('.btn-edit').on('click',function(event){
+        var btn = $(event.target);
+        var row = btn.data('row').split('|');
+        $('#name').val(row[1]);
+        $('#description').val(row[2]);
+        var description = row[2].split(',');
+        $('.btn-commit').on('click',function(){
+            var name =  document.getElementById("name").value;
+            var description =  $('#description').val();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'project_edit' %}",
+                data: {"id":row[0],"name":name,"description":description},
+                success: function(data,textStatus){
+                      window.location.reload()
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      alert(XMLHttpRequest.status);
+                      alert(XMLHttpRequest.readyState);
+                      alert(textStatus);
+                },
+            });
+        });
+    })
+    $('.btn-add').on('click',function(){
+        reset();
+        $('.btn-commit').on('click',function(){
+
+            var name =  document.getElementById("name").value;
+            var description =  $("#description").val();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'project_add' %}",
+                data: {"name":name,"description":description},
+                success: function(data,textStatus){
+                      window.location.reload()
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      alert(XMLHttpRequest.status);
+                      alert(XMLHttpRequest.readyState);
+                      alert(textStatus);
+                },
+            });
+        });
+    });
+
+</script>
+{% endblock %}

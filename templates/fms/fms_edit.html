@@ -1,0 +1,160 @@
+
+{% extends 'base/base_site.html' %} 
+{% block css %}
+{{ block.super}}
+<link href="/static/css/animate.css" rel="stylesheet">
+<link href="/static/css/style.css" rel="stylesheet">
+<link href="/static/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="/static/js/plugins/editormd/editormd.css" />
+<link rel="stylesheet" type="text/css" href="/static/js/plugins/datetimepicker/css/bootstrap-datetimepicker.css" />
+<link href="/static/js/plugins/editormd/lib/katex/katex.min.css" rel="stylesheet">
+<style type="text/css">
+    .form_datetime {
+        background-color: #eee;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 4px 6px;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+    }
+
+    .table-condensed td {
+        font-size: 10px;
+    }
+    .dow {
+        font-size: 14px;
+    }
+    .switch {
+        font-size: 14px;
+      }
+
+div:empty:before{
+content: attr(placeholder);
+color:#bbb;
+}
+div:focus:before{
+content:none;
+}
+</style>
+
+{% endblock %}
+{% block content %}
+
+
+<div class="row">
+            <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>添加故障</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                            <div id="overview-content" class="ibox-content">
+                            <form id="fmsform" method="POST" class="form-horizontal" action="{% url 'fms_edit' %}?id={{ id }}">
+                            {% include 'fms/fms_content.html'%}
+                            </form>
+                            </div>
+                    </div>
+            </div>
+{% endblock %}
+
+
+{% block javascripts %}
+{{ block.super}}
+<script src="/static/js/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="/static/js/plugins/editormd/editormd.min.js"></script>
+<script src="/static/js/plugins/editormd/lib/katex/katex.min.js"></script>
+
+<script type="text/javascript">
+
+    var Editor;
+    var description = '请使用Markdown格式编写:\n19:54~20:19 萧山机房59.111.3.8受到SYN类型超132Gbps流量攻击\n20:02 机房安全部将此IP加入绿盟清洗设备\n20:25~21:08 萧山机房59.111.3.81受到SYN类型超137Gbps流量攻击\n1. 分析1 \n2. 分析2\n3. 分析3'
+    $(function() {
+                Editor = editormd("editormd", {
+                width   : "80%",
+                height  : 500,
+                watch: 0,
+                syncScrolling : true,
+                flowChart: true,
+                sequenceDiagram : true,
+                taskList : true,
+                tex  : true,
+                imageUpload : true,//开启本地图片上传
+                imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL : "/images/upload",//图片上传地址
+                placeholder: description,
+                path    : "/static/js/plugins/editormd/lib/",
+
+            });
+        });
+</script>
+
+<script type="text/javascript">
+    function toggleChevron(e) {
+    $(e.target)
+        .prev('.panel-heading')
+        .find("i.indicator")
+        .toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+    }
+    $('#accordion').on('hidden.bs.collapse', toggleChevron);
+    $('#accordion').on('shown.bs.collapse', toggleChevron);
+
+</script>
+
+
+<script type="text/javascript">
+    $("#collapse2").click(function(){
+        Editor.resize();
+         $(".CodeMirror").css("width","100%");
+         $(".CodeMirror-sizer").css("top","20px");
+         var text = document.getElementById('id_content').value;
+         Editor.setValue(text);
+    })
+</script>
+
+<script type="text/javascript">
+    $(".form_datetime").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        minuteStep: 2,
+        yearStart: 2017,
+    });
+    Date.prototype.Format = function (fmt) {  
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+    date = new Date().Format("yyyy-MM-dd hh:mm");
+//默认显示当前时间
+    $(".form_datetime").val(date);
+
+</script>
+
+{% endblock %}

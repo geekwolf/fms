@@ -1,0 +1,31 @@
+{% load accounts_tag %}
+{% for i in content %}
+    <tr class="gradeA odd" role="row">
+        <td>{{ i.username }}</td>
+        <td>{{ i.email }}</td>
+        <td class="center">{{ i.fullname }}</td>
+        <td class="center">{{ i.mobile }}</td>
+        <td class="center">
+        {% if i.is_active %}
+        <span class="btn btn-xs btn-primary">正常</span>
+        {% else %}
+        <span class="btn btn-xs btn-default">禁用</span>
+        {% endif %}
+        </td>
+        <td class="center"> {% if i.is_superuser %}是{% else %}否{% endif %}</td>
+        <td class="center"> 
+        {%  if i.groups.all %}
+        {{  i.groups.all | gsetostr }}
+        {% endif %}
+
+        </td>
+        <td class="center">
+            <a href={% url 'accounts_edit' %}?id={{i.id}} data-row="{{ i.id }}|{{ i.groups.all | gsetostr }}" class="btn btn-xs btn-success">编辑</a>
+            <a href={% url 'accounts_del' %}?id={{i.id}} class="btn btn-xs btn-danger" onclick="return confirm('确认删除吗？')">删除</a>
+        </td>
+    </tr>
+{% endfor %}
+
+<script type="text/javascript">
+    
+</script>

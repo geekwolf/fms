@@ -1,0 +1,64 @@
+{% extends 'base/base_site.html' %} 
+{% block css %}
+{{ block.super}}
+
+
+<style type="text/css">
+  .form-control-bulk-import {
+    width:200px;
+    display:inline;
+}
+
+</style>
+
+
+
+{% endblock %}
+{% block content %}
+<div class="ibox-title">
+  <h5>故障列表</h5>
+</div>
+<div class="ibox-content">
+  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="dataTables_length" id="DataTables_Table_0_length" style="margin-bottom:15px;">
+          <a href={% url 'fms_add'%} class="btn btn-sm btn-success"><i class="fa fa-plus"></i> 添加故障</a>
+         <!-- <button id="bulk_update" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i> 批量更新</button> 
+          <button id="bulk_delete" class="btn btn-sm btn-danger"><i class="fa fa-recycle"></i> 批量删除</button> 
+         -->
+          <!-- <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#bulk_import"><i class="fa fa-arrow-up"></i> 批量导入</a> -->
+          <input type="text" placeholder="搜索" id="search" class="form-control input-sm">
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered table-hover dataTables-example dataTable dtr-inline" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+      <thead>
+        <tr role="row">
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending">ID</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >故障简述</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >故障级别</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >故障类型</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >影响项目</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >主导改进</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >持续时间</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >故障状态</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >创建者</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >创建时间</th>
+          <th  tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" >操作</th>
+
+        </tr>
+      </thead>
+      <tbody id="content">
+      {% include 'fms/fms_table.html'%}
+      </tbody>
+    </table>
+{% include 'common/paginator.html'%}
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ block.super}}
+
+
+
+{% endblock %}

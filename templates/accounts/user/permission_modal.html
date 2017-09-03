@@ -1,0 +1,51 @@
+<div class="modal inmodal" id="perm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h6 class="modal-title" align="left" style="font-size: 20px;font-weight: bold">权限分配</h6>
+            </div>
+            <div class="modal-body" style="height: 300px">
+
+            <form class="form-horizontal" id="jquery_post_from" method="post" role="form">
+                <input type="hidden" name="csrfmiddlewaretoken" value="kRaVIjNCyIT8a9V7EzT7ffeSH3avSyg7">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2 col-lg-2" for="id_group_name">用户组名</label>
+                    <div class=" col-sm-10 col-lg-10 ">
+                        <input class="form-control" id="group_name" name="group_name" maxlength="100" type="text" value={{i.name}}>
+                    </div>
+                </div>
+
+
+
+                {% if perm.accounts %}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">权限管理 </label>
+
+                    {% for i in perm.accounts %}
+
+                        <div class=" col-sm-3 col-lg-3 ">
+                                <input type="checkbox" class="i-checks check_all"> <span>{{ i.name }}</span>
+                        </div>
+
+                        {% if forloop.counter|divisibleby:3 %}</br>{% endif %} 
+
+                    {% endfor %} 
+
+                {% endif %}
+
+                </div>
+
+
+
+
+   
+
+
+            </form>
+
+            </div>
+        </div>
+    </div>
+</div>

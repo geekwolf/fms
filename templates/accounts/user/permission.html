@@ -1,0 +1,153 @@
+{% extends 'base/base_site.html' %} 
+{% load accounts_tag %}
+{% block css %}
+{{ block.super}}
+<link href="/static/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/css/plugins/chosen/chosen.css">
+
+{% endblock%}
+{% block content %}
+
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>权限分配</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="#">Config option 1</a>
+                                    </li>
+                                    <li><a href="#">Config option 2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+
+<div class="ibox-content">
+    <form class="form-horizontal" id="auth_group_from"  role="form">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> 用户组名 </label>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <div class=" col-sm-offset-2 col-sm-10 col-lg-offset-2 col-lg-10">
+                    <input type="text" name="group_name" class="form-control" value="{{group.name}}" readonly="readonly">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> 用户管理 </label>
+            <div class="col-sm-3">
+
+            {% if accounts %}
+                {% for i in accounts %}
+                <div class="form-group">
+                    <div class=" col-sm-offset-2 col-sm-10 col-lg-offset-2 col-lg-10">
+                    {% if i in gperm %}
+                        <input type="checkbox" class="i-checks" checked="checked" id="{{i.codename}}">
+                    {% else %}
+                        <input type="checkbox" class="i-checks" id="{{i.codename}}">
+
+                    {% endif %}
+                        <span>{{i.name}}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"> 故障管理 </label>
+            <div class="col-sm-3">
+
+            {% if content  %}
+
+                {% for i in content %}
+                    {% if i.content_type.model == "images" %}
+                    {% else %}
+                        <div class="form-group">
+                            <div class=" col-sm-offset-2 col-sm-10 col-lg-offset-2 col-lg-10">
+                            {% if i in gperm %}
+                                <input type="checkbox" class="i-checks" checked="checked" id="{{i.codename}}">
+                            {% else %}
+                                <input type="checkbox" class="i-checks" id="{{i.codename}}">
+
+                            {% endif %}
+
+                            <span>{{i.name}}</span>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+            {% endif %}
+
+            </div>
+        </div>
+
+        <div class="hr-line-dashed"></div>
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-5">
+                <button class="btn btn-white" type="cancel"> 重置 </button>
+                <button class="btn btn-primary btn-commit" type="button"> 提交 </a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+                </div>
+            </div>
+{% endblock %}
+{% block javascripts %}
+{{ block.super}}
+<script src="/static/js/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('.i-checks').iCheck({
+          checkboxClass: 'icheckbox_square-green',
+          radioClass: 'iradio_square-green',
+      });
+});
+function get_perms(){
+    var perms = new Array();
+    $("input[class='i-checks']:checkbox").each(function(){
+        console.log($(this).is(':checked'));
+        if(true == $(this).is(':checked')){
+            var perm = $(this).attr('id');
+            perms.push(perm);
+        }
+    });
+    return perms
+}
+
+$(".btn-commit").click(function(){
+    var perms = get_perms();
+      $.ajax({
+          type: "POST",
+          url: "{% url 'accounts_permission' %}",
+          async: true,
+          data: {"perms": JSON.stringify(perms),"id": "{{group.id}}"},
+          success: function(data,textStatus){
+                window.location.href="{% url 'accounts_group' %}";
+          },
+          error: function (XMLHttpRequest, textStatus, errorThrown) {
+          },
+      });
+});
+
+</script>
+{% endblock %}

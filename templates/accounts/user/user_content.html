@@ -1,0 +1,64 @@
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{ form.username.label }}</label>
+    <div class="col-sm-8">{{ form.username }}</div>
+    {{ form.username.error }}
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{ form.group.label }}</label>
+    <div class="col-sm-8">{{ form.group }}</div>
+    {{ form.group.error }}
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{ form.password.label }}</label>
+    <div class="col-sm-8">{{ form.password }}</div>
+    {{ form.password.error }}
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">用户组</label>
+    <div class="col-sm-8">
+        <select data-placeholder="选择用户组" id="groups" class="chosen-select" name="groups" multiple="multiple" style="width: 350px; display: none;" tabindex="-1">
+        </select>
+    </div>
+</div>       
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{ form.fullname.label }}</label>
+    <div class="col-sm-8">{{ form.fullname }}</div>
+    {{ form.fullname.error }}
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{ form.email.label }}</label>
+    <div class="col-sm-8">{{ form.email }}</div>
+    {{ form.email.error }}
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{ form.mobile.label }}</label>
+    <div class="col-sm-8">{{ form.mobile }}</div>
+    {{ form.mobile.error }}
+</div>
+<div class="form-group">
+<label class="col-sm-2 control-label">{{ form.is_superuser.label }}</label>
+<div class="col-sm-8">
+    <label class="checkbox-inline" style="color:#1AB394">{{ form.is_superuser }}是:请勾选</label>
+</div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label">{{ form.is_active.label }}</label>
+    <div class="col-sm-8">{{ form.is_active }}</div>
+    {{ form.is_active.error }}
+</div>
+
+<div class="hr-line-dashed"></div>
+<div class="form-group">
+
+<div style="padding-left: 200px;color:red">
+    <div class="col-sm-8"><b>{{ error }}</b></div>
+</div>
+</div>
+<div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+        <button class="btn btn-white" type="submit">Cancel</button>
+        <button class="btn btn-primary" type="submit">Save changes</button>
+    </div>
+</div>
+</script>
+
