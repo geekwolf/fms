@@ -1,6 +1,8 @@
-
-# -*- coding: utf-8 -*-
-
+#-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response
@@ -8,7 +10,6 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from accounts.models import Project,User
 from accounts.forms import ProjectForm
-# from accounts.permission import permission_verify
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import json
 from django.conf import settings

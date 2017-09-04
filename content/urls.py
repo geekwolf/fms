@@ -1,6 +1,9 @@
-# coding:UTF-8
+#-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from __future__ import unicode_literals
-
 from django.conf.urls import url
 from content import views 
 

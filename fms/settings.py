@@ -139,7 +139,6 @@ LOGIN_URL = '/accounts/login/'
 MEDIA_ROOT = 'uploads/'
 MEDIA_URL = 'uploads/'
 
-
 BREADCRUMBS_AUTO_HOME: True
 BREADCRUMBS_HOME_TITLE: u'Home'
 

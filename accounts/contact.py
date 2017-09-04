@@ -1,5 +1,8 @@
-# -*- coding: utf-8 -*-
-
+#-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render_to_response

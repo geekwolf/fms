@@ -1,0 +1,5 @@
+django==1.11.0
+django-breadcrumbs==1.1.4a1
+collections
+django-paginator
+

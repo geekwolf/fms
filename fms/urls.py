@@ -1,5 +1,8 @@
 #-*- coding: utf-8 -*-
-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.conf.urls import url,include
 from django.contrib import admin
 from content import urls,views

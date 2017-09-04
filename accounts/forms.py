@@ -1,4 +1,8 @@
 #-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from accounts.models import User
 from django.contrib.auth.models import Group,Permission
 from django import forms

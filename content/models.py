@@ -1,9 +1,14 @@
 #-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Permission, Group
 from django.conf import settings
 from accounts.models import User,Project
 from content.storage import images_storage
+
 class Type(models.Model):
     name = models.CharField(max_length=255, verbose_name=u"故障类型")
 

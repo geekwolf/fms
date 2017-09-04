@@ -1,4 +1,8 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.conf.urls import url, include
 from accounts import views,api,project,contact,permissions
 urlpatterns = [

@@ -1,5 +1,8 @@
 #-*- coding: utf-8 -*-
-import time
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.contrib.auth.decorators import login_required
 from content.models import Content, Type, User, Images
 from django.core.urlresolvers import reverse
@@ -7,11 +10,8 @@ from django.shortcuts import render_to_response, HttpResponseRedirect, HttpRespo
 from content.forms import ContentForm,TypeForm,ImagesUploadForm
 from django.core.exceptions import ObjectDoesNotExist
 from commons.paginator import paginator
-# from accounts.permission import permission_verify
-import json
+import json,time,collections
 from accounts.models import Contact
-import collections
-# from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string

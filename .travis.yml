@@ -1,3 +1,9 @@
 language: python
 python:
-  - 3.6
+  - "3.6"
+env:
+  - DJANGO=1.11.0
+
+install:
+  - pip install -r requirements.txt
+  

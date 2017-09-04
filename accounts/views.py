@@ -1,6 +1,9 @@
 #-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.shortcuts import render,render_to_response,reverse
-from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import auth
 from accounts.forms import LoginForm,UserForm

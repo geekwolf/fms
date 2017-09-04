@@ -1,5 +1,8 @@
-# -*- coding: UTF-8 -*-
-
+#-*- coding: utf-8 -*-
+'''
+    Author: Geekwolf
+    Blog: http://www.simlinux.com
+'''
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 
