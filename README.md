@@ -62,6 +62,11 @@ python manage.py loaddata default_user
 ```
 python manage.py runserver
 http://127.0.0.1:8080
+admin admin
 ```
 
-![fms](./doc/images/dashboard.jpg)
+![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/dashboard.jpg)
+![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/fms.jpg)
+![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/add_fms.jpg)
+![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/add_user.jpg)
+![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/group_perm.jpg)
