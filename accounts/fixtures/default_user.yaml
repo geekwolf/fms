@@ -1,0 +1,11 @@
+- model: accounts.user
+  pk: 1
+  fields:
+     username: admin
+     email: admin@simlinux.com
+     fullname: geekwolf
+     is_active: 1
+     is_superuser: 1
+     password: pbkdf2_sha256$36000$bwOL2ef45UxQ$gllF7f7tlz9xskknOhqcanFFpez+4yWW5QNXJDgpcS8=
+     date_joined: 2017-09-15
+

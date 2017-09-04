@@ -38,5 +38,6 @@ def permission(request):
         perms = Permission.objects.filter(codename__in = perms)
         group.permissions.clear()
         group.permissions.add(*perms)
+    data['request'] = request
 
     return render_to_response('accounts/user/permission.html', data)

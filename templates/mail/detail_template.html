@@ -3,7 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<link href="http://192.168.101.89:1111/static/css/code.css" rel="stylesheet">
 	<title>故障报告</title>
 </head>
 <body>
@@ -16,7 +15,7 @@
 						<td height="18"></td>
 					</tr>
 					<tr>
-						<td style="font-size:20px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;line-height:1.6;color:#fff;text-align:center;">【故障报告】<a style="text-decoration:none;color:white;" href="http://fms.wow/fms/detail/{{ content.id }}">{{ content.title }}</a></td>
+						<td style="font-size:20px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;line-height:1.6;color:#fff;text-align:center;">【故障报告】<a style="text-decoration:none;color:white;" href="{{ domain }}/fms/detail?id={{content.id}}>{{ content.title }}"</a></td>
 					</tr>
 					<tr>
 						<td style="font-size:14px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;line-height:1.6;color:#fff;text-align:center;">创建时间:{{ content.ctime }}</td>
@@ -156,7 +155,7 @@
 											<tr>
 												<th colspan="2" style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:2px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">
 												           {% spaceless %}
-            													{{content.content|markdown|linebreaks}}
+            													{{content.content|linebreaks}}
             											   {% endspaceless %}
 											    </th>
 											</tr>
@@ -225,7 +224,7 @@
 										</table>
 									</td>
 								</tr>
-								<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">故障详情:  <a href="http://fms.wow/fms/detail/{{ content.id }}">http://fms.wow/fms/detail/{{ content.id }}</a>  历史故障统计: <a href="http://fms.wow/dashboard/">http://fms.wow/dashboard/</a></td>
+								<td style="font-size:13px;font-family:'Microsoft YaHei',Helvetica,Arial,sans-serif;font-weight:normal;color:#222;text-align:left;border-bottom:1px solid #e9e9e9;padding:15px 0 15px;line-height:1.5;">故障详情:  <a href="{{ domain }}/fms/detail?id={{content.id}}">{{ domain }}/fms/detail?id={{content.id}}</a>  历史故障统计: <a href="{{domain}}/dashboard/">{{domain}}/dashboard/</a></td>
 
 							</table>
 						</td>

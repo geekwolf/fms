@@ -30,14 +30,13 @@ def index(request):
     request.role = role
     return render_to_response('base/index.html', {'request': request})
 
+
 @login_required
 def userprofile(request):
     username = request.user
     user = User.objects.filter(username=username).values_list(
         'username', 'email', 'last_login','fullname')
     return render_to_response('profile.html', {'profile': user})
-
-
 
 def time_count(content,start_time,end_time):
 
@@ -48,7 +47,6 @@ def time_count(content,start_time,end_time):
 
         setattr(content, 'time', str(timestamp // 3600) + '小时' + str(timestamp % 3600 // 60) + '分')
 
-
 @login_required
 @permission_required('content.get_content',raise_exception=True)
 def fms_list(request):
@@ -58,7 +56,7 @@ def fms_list(request):
     for i in content:
         time_count(i,i.start_time,i.end_time)
     data = paginator(request, content)
-    request.breadcrumbs((('首页', '/'),('故障管理',reverse('fms_list'))))
+    request.breadcrumbs((('首页', '/'),('故障列表',reverse('fms_list'))))
 
     return render_to_response('fms/fms.html',data)
 
@@ -81,6 +79,8 @@ def fms_add(request):
                 return HttpResponseRedirect(reverse('fms_list'))
     else:
         form = ContentForm()
+
+    request.breadcrumbs((('首页', '/'),('故障列表',reverse('fms_list')),('添加故障',reverse('fms_add'))))
     return render(request, 'fms/fms_add.html', {'request': request, 'form': form, 'error': error})
 
 
@@ -195,8 +195,8 @@ def exec_send(content_id,email_list):
 
     content = Content.objects.select_related().get(id=content_id)
     data['content'] = content
+    data['domain'] = settings.EMAIL_DOMAIN_LINK
     subject = '【故障报告】' + str(content.title)
-
     time_count(content,content.start_time,content.end_time)
 
     msg_html = render_to_string('mail/detail_template.html', data)
@@ -213,7 +213,6 @@ def send_mails(request):
         email_group = json.loads(request.POST.get('email_group'))
         if email_group:
             contact = Contact.objects.filter(name__in=email_group).values('email')
-
         email_list = (',').join([i['email'] for i in contact]).split(',')
         exec_send(content_id,email_list)
     return HttpResponse('ok')

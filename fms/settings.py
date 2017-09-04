@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'accounts.templatetags',
-    'content'
-
+    'content',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fms',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -142,10 +142,14 @@ MEDIA_URL = 'uploads/'
 BREADCRUMBS_AUTO_HOME: True
 BREADCRUMBS_HOME_TITLE: u'Home'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = False
 EMAIL_HOST = 'service.simlinux.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = 'admin@service.simlinux.com'
 EMAIL_HOST_PASSWORD = 'xxx'
 DEFAULT_FROM_EMAIL = 'geekwolf <admin@service.simlinux.com>'
+#要细分统计的故障类型ID
+SPECIAL_TYPES = [7,8]
+
+#邮件连接地址
+EMAIL_DOMAIN_LINK = 'http://127.0.0.1'

@@ -90,7 +90,7 @@ def accounts_add(request):
 
     groups = get_groups(request)
     print(groups)
-    request.breadcrumbs((('首页', '/'),('用户管理',reverse('accounts_user')),('添加用户',reverse('accounts_add'))))
+    request.breadcrumbs((('首页', '/'),('用户列表',reverse('accounts_user')),('添加用户',reverse('accounts_add'))))
 
     return render(request, 'accounts/user/user_add.html', {'request': request, 'form': form, 'error': error, 'groups': groups})
 

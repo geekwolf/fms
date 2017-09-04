@@ -1,0 +1,32 @@
+- model: content.Type
+  pk: 1
+  fields:
+     name: '运营商故障'
+- model: content.Type
+  pk: 2
+  fields:
+     name: '机房故障'
+- model: content.Type
+  pk: 3
+  fields:
+     name: '流程/规范'
+- model: content.Type
+  pk: 4
+  fields:
+     name: '第三方服务故障'
+- model: content.Type
+  pk: 5
+  fields:
+     name: 'SA变更'
+- model: content.Type
+  pk: 6
+  fields:
+     name: '硬件故障'
+- model: content.Type
+  pk: 7
+  fields:
+     name: '业务程序故障'
+- model: content.Type
+  pk: 8
+  fields:
+     name: '业务程序BUG'

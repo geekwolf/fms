@@ -1,5 +1,6 @@
 {% extends 'base/base_site.html' %} 
 {% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/plugins/chosen/chosen.css">
 {{ block.super}}
 <style type="text/css">
   .form-control-bulk-import {
@@ -49,12 +50,119 @@
       {% include 'fms/fms_table.html'%}
       </tbody>
     </table>
+<div class="modal inmodal" id="editor" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content animated fadeIn">
+            <div class="modal-body" style="margin-top: 15px">
+                <form class="form-horizontal" id="jquery_post_from" method="post" action="">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="kRaVIjNCyIT8a9V7EzT7ffeSH3avSyg7">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3 col-lg-3" for="id_explanation">选择邮件组</label>
+                        <div class=" col-sm-8 col-lg-8 ">
+                            <select data-placeholder="选择权限" class="chosen-select" multiple="" style="width: 350px; display: none;" tabindex="-1" id="email">
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div style="text-align:center">
+                    <button class="btn btn-white" type="cancel"> 重置 </button>
+                    <button class="btn btn-primary btn-commit"> 提交 </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% include 'common/paginator.html'%}
 </div>
 {% endblock %}
 {% block javascripts %}
 {{ block.super}}
+<script src="/static/js/plugins/chosen/chosen.jquery.js" type="text/javascript"></script>
+<script type="text/javascript">
+function resetChosen() {
+    var config = {
+        '.chosen-select': {
+            width: "100%"
+        },
+        '.chosen-select-deselect': {
+            allow_single_deselect: true
+        },
+        '.chosen-select-no-single': {
+            disable_search_threshold: 10
+        },
+        '.chosen-select-no-results': {
+            no_results_text: 'Oops, nothing found!'
+        },
+        '.chosen-select-width': {
+            width: "100%"
+        },
 
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+    $('#email').trigger("chosen:updated");
+}
 
+</script>
+<script type="text/javascript">
+  function reset() {
+        $('#email').val("");
+    }
+
+String.prototype.bool = function() { 
+    return (/^true$/i).test(this); 
+};
+</script>
+
+<script type="text/javascript">
+
+    $('.btn-email').on('click',function(event){
+        var btn = $(event.target);
+        var row = btn.data('row').split('|');
+        var id = row[0];
+        var cauthor = row[1];
+        var nuser = "{{ request.session.fullname }}";
+        if( cauthor == nuser || "{{ request.user.is_superuser }}".bool() ){
+          $("a").attr("data-target","#editor");
+          $("#email").empty();
+          $.get("{% url 'get_email' %}",function(data,status){
+                if(data.length >0 && status == "success"){
+                            $.each(jQuery.parseJSON(data),function(k,v){
+                                var  obj = document.getElementById("email");
+                                var  op = new Option(v.name,v.name)
+                                obj.add(op);
+                            })
+                }
+                resetChosen();
+
+         });
+
+        $('.btn-commit').on('click',function(){
+            var email_group =  $('#email').val();
+            $.ajax({
+                type: "POST",
+                url: "{% url 'send_mails' %}",
+                async: true,
+                data: {"content_id":id,"email_group":JSON.stringify(email_group)},
+                success: function(data,textStatus){
+                      window.location.reload()
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      alert(XMLHttpRequest.status);
+                      alert(XMLHttpRequest.readyState);
+                      alert(textStatus);
+                },
+            });
+        });
+        }
+        else{
+          $("a").removeAttr("data-target");
+          alert("只有创建者才可以发送通知！");
+        }
+       
+    });
+</script>
 
 {% endblock %}

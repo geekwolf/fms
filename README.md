@@ -11,3 +11,48 @@ FMS(Fault Management System: 运维故障管理系统)
 - 用户管理
 - 邮件管理
 - 统计Dashboard
+
+## 部署
+
+### 安装依赖
+
+```
+pip3 install -i https://pypi.douban.com/simple/  -r requirements.txt
+```
+
+### 修改配置
+
+
+MySQL配置修改settings.py:
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fms',
+        'USER': 'root',
+        'PASSWORD': 'xxxx',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    }
+}
+```
+修改故障通知邮箱settings.py:
+
+```
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'service.simlinux.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'admin@service.simlinux.com'
+EMAIL_HOST_PASSWORD = 'xxx'
+DEFAULT_FROM_EMAIL = 'geekwolf <admin@service.simlinux.com>'
+
+```
+
+### 初始化数据
+```
+python manage.py loaddata default_types
+python manage.py loaddata default_user
+
+```
