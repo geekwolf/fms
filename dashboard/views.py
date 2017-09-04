@@ -3,7 +3,7 @@
     Author: Geekwolf
     Blog: http://www.simlinux.com
 '''
-from django.shortcuts import render_to_response, HttpResponseRedirect, HttpResponse, render
+from django.shortcuts import render_to_response, HttpResponseRedirect, HttpResponse, render, reverse
 import json
 import collections
 import datetime
@@ -13,6 +13,7 @@ from django.conf import settings
 
 def index(request):
 
+    request.breadcrumbs((('首页', '/'),('故障列表',reverse('fms_list')),('故障统计',reverse('dashboard_index'))))
     return render_to_response('dashboard/index.html', {'request': request})
 
 
