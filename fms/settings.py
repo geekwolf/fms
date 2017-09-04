@@ -64,19 +64,18 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request'
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
             ],
         },
     },
 ]
-
 
 WSGI_APPLICATION = 'fms.wsgi.application'
 
@@ -143,3 +142,11 @@ MEDIA_URL = 'uploads/'
 
 BREADCRUMBS_AUTO_HOME: True
 BREADCRUMBS_HOME_TITLE: u'Home'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'service.simlinux.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'admin@service.simlinux.com'
+EMAIL_HOST_PASSWORD = 'xxx'
+DEFAULT_FROM_EMAIL = 'geekwolf <admin@service.simlinux.com>'

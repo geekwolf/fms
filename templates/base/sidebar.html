@@ -46,7 +46,7 @@
                     <li>
                         <a href="mailbox.html"><i class="fa fa-group"></i> <span class="nav-label">权限管理 </span><span class="label label-warning pull-right">New</span></a>
                         <ul class="nav nav-second-level">
-                        {% if !user.is_superuser %}
+                        {% if request.user.is_superuser %}
                             <li><a href={% url 'accounts_user' %}>用户管理</a></li>
                             <li><a href={% url 'accounts_group' %}>用户组</a></li>
                             <li><a href="{% url 'project_list' %}">项目管理</a></li>

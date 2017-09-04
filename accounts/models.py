@@ -10,13 +10,6 @@ from django.core import validators
 import uuid
 from django.utils import timezone
 
-# class Permission(models.Model):
-#     name = models.CharField(max_length=64,unique=True)
-#     url = models.CharField(max_length=255)
-
-#     def __unicode__(self):
-#         return '%s(%s)' % (self.name, self.url)
-
 
 class Project(models.Model):
     name = models.CharField(max_length=64,unique=True)
@@ -111,10 +104,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email']
 
     def __str__(self): 
-        return self.fullname
+
+        if self.fullname:
+            field = self.fullname
+        else:
+            field = self.username
+
+        return field
 
     def __unicode__(self):
-        return self.fullname
+        
+        if self.fullname:
+            field = self.fullname
+        else:
+            field = self.username
+            
+        return field
 
     def get_short_name(self):
         "Returns the short name for the user."

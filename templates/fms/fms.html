@@ -1,17 +1,12 @@
 {% extends 'base/base_site.html' %} 
 {% block css %}
 {{ block.super}}
-
-
 <style type="text/css">
   .form-control-bulk-import {
     width:200px;
     display:inline;
 }
-
 </style>
-
-
 
 {% endblock %}
 {% block content %}
@@ -23,6 +18,7 @@
     <div class="row">
       <div class="col-sm-8">
         <div class="dataTables_length" id="DataTables_Table_0_length" style="margin-bottom:15px;">
+        {{request.perms.List}}
           <a href={% url 'fms_add'%} class="btn btn-sm btn-success"><i class="fa fa-plus"></i> 添加故障</a>
          <!-- <button id="bulk_update" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i> 批量更新</button> 
           <button id="bulk_delete" class="btn btn-sm btn-danger"><i class="fa fa-recycle"></i> 批量删除</button> 

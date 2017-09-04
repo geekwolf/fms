@@ -57,7 +57,6 @@ def accounts_user(request):
     user = User.objects.all()
     data = paginator(request, user)
     request.breadcrumbs((('首页', '/'),('用户管理',reverse('accounts_user'))))
-    u = User.objects.get(username='test')
 
     return render_to_response('accounts/user/user.html',data)
 
