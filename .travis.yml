@@ -4,8 +4,15 @@ python:
 env:
   - DJANGO=1.11.0
 
+services: mysql
+
 install:
   - pip install -r requirements.txt
-  
+
+before_script:
+  - mysql -uroot -e 'create database fms;'
+  - python manage.py makemigrations
+  - python manage.py migrate
+
 script:  
     - python manage.py test 
