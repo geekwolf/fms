@@ -56,3 +56,10 @@ python manage.py loaddata default_types
 python manage.py loaddata default_user
 
 ```
+
+### 登录
+
+```
+python manage.py runserver
+http://127.0.0.1:8080
+```

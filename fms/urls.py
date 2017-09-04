@@ -9,10 +9,11 @@ from content import urls,views
 from django.conf.urls.static import static
 from django.conf import settings
 from content import views as content_views
+from dashboard import views as dashboard_views
 
 urlpatterns = [
+    url(r'^$',dashboard_views.index, name="index"),
     url(r'^admin/', admin.site.urls),
-    url(r'^$',content_views.fms_list, name="index"),
     url(r'accounts/', include('accounts.urls')),
     url(r'fms/', include('content.urls')),
 
