@@ -52,6 +52,8 @@ DEFAULT_FROM_EMAIL = 'geekwolf <admin@service.simlinux.com>'
 
 ### 初始化数据
 ```
+python manage.py makemigrations
+python manage.py migrate
 python manage.py loaddata default_types
 python manage.py loaddata default_user
 
