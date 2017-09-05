@@ -25,7 +25,7 @@
           <button id="bulk_delete" class="btn btn-sm btn-danger"><i class="fa fa-recycle"></i> 批量删除</button> 
          -->
           <!-- <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#bulk_import"><i class="fa fa-arrow-up"></i> 批量导入</a> -->
-          <input type="text" placeholder="搜索" id="search" class="form-control input-sm">
+          <input type="text" placeholder="搜索: 故障、类型、项目" id="search" class="form-control input-sm">
         </div>
       </div>
     </div>
@@ -79,6 +79,34 @@
 {% block javascripts %}
 {{ block.super}}
 <script src="/static/js/plugins/chosen/chosen.jquery.js" type="text/javascript"></script>
+<!-- 实时搜索 -->
+<script type="text/javascript">
+    var flag;
+    function func1() {
+        clearTimeout(flag);
+        flag = setTimeout(function() {
+          data();
+        }, 200);
+
+    }
+    function  data(){
+        search = $('#search').val();
+        $.ajax({
+          url: '{% url 'fms_search' %}',
+          type: 'GET',
+          dataType: 'html',
+          data: {"search":search},
+          success: function(data){
+          $("#content").html(data);
+          }
+        });
+    }
+    $("#search").keyup(function(event){
+      func1();
+    });
+</script>
+<!-- 实时搜索End -->
+
 <script type="text/javascript">
 function resetChosen() {
     var config = {
