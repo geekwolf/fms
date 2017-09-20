@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^get/email$',views.get_email, name='get_email'),
     url(r'^send/emails$',views.send_mails, name='send_mails'),
     url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^images/upload$', content_views.upload_images, name='upload_images'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
