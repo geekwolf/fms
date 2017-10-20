@@ -105,6 +105,7 @@
         var page = {{content.number}};
         window.location.href='?page='+ page+'&'+'pagenumber='+pagenumber;
       });
+     $(".pagination li:eq({{content.number}})").addClass("active");
 
     </script>
 
