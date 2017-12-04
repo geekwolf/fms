@@ -67,6 +67,10 @@ http://127.0.0.1:8000
 admin admin
 ```
 
+### 交流群
+
+QQ群1: 541071512
+
 ![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/dashboard.jpg)
 ![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/fms.jpg)
 ![fms](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/add_fms.jpg)
