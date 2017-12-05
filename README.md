@@ -67,9 +67,9 @@ http://127.0.0.1:8000
 admin admin
 ```
 
-### 微信群
+### 交流
 
-![微信](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/wxq.jpg)
+![微信](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/wx.jpg)
 
 QQ群1: 541071512
 
