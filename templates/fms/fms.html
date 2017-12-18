@@ -151,7 +151,7 @@ String.prototype.bool = function() {
         var row = btn.data('row').split('|');
         var id = row[0];
         var cauthor = row[1];
-        var nuser = "{{ request.session.fullname }}";
+        var nuser = "{{ request.user.fullname }}";
         if( cauthor == nuser || "{{ request.user.is_superuser }}".bool() ){
           $("a").attr("data-target","#editor");
           $("#email").empty();
