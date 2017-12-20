@@ -83,36 +83,35 @@ def get_pie_history_data(data, item):
     return result
 
 
-def get_line_data(data, item):
+def get_line_data(data,item):
 
-    item_legend = data.keys()
-    result = {}
-    item_data = []
-    now_month = datetime.datetime.now().month
-    for k, v in data.items():
-        for i in range(1, now_month + 1):
-            delta = (now_month - i) * 365 / 12
-            month = (datetime.date.today() - datetime.timedelta(delta)).strftime("%Y-%m")
-            if month not in v:
-                v[month] = 0
-        per_item = {"name": k, "stack": '总量', "data": list(v.values()), "type": 'line'}
-        item_data.append(per_item)
+        item_legend =  data.keys()
+        result = {}
+        item_data = []
+        now_month = datetime.datetime.now().month
 
-    for i in range(1, now_month + 1):
-        delta = (now_month - i) * 365 / 12
-        month = (datetime.date.today() - datetime.timedelta(delta)).strftime("%Y-%m")
+        xaxis_month = get_month()
+        for k,v in data.items():
+                _tmp = collections.OrderedDict()
+                for i in xaxis_month:
+                    if i in list(v.keys()):
+                        _tmp[i] = v[i]
+                    else:
+                        _tmp[i] = 0
+                per_item = {"name":k,"stack": '总量',"data":_tmp.values(),"type":'line'}
+                item_data.append(per_item)
 
-    xaxis_month = get_month()
-    text = "今年故障统计"
-    if item == "fms_application_sum":
-        subtext = "针对业务故障类型"
-    elif item == "fms_sum":
-        subtext = "针对所有故障类型"
-    else:
-        pass
+        text = "今年故障统计"
+        if item == "fms_application_sum":
+                subtext = "针对业务故障类型"
+        elif item == "fms_sum":
+                subtext = "针对所有故障类型"
+        else:
+                pass
 
-    result = {"text": text, "subtext": subtext, "data": item_data, "legend": list(item_legend), "xaxis_data": xaxis_month, "type": 'line'}
-    return result
+        result = {"text":text,"subtext":subtext,"data": item_data,"legend": item_legend,"xaxis_data":xaxis_month,"type": 'line'}
+
+        return result
 
 
 def index_data(request):
