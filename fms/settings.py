@@ -26,7 +26,7 @@ SECRET_KEY = 'y2th+kwi1t&aj5c#&o-+%+prb2n6vewxs@$3y%731l7rf8yl%0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL="accounts.User"
 
 # Application definition
