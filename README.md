@@ -68,7 +68,7 @@ admin admin
 ```
 
 ### 交流
-
+![赞赏](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/wxzf.png)
 ![微信](https://raw.githubusercontent.com/geekwolf/fms/master/doc/images/wx.jpg)
 
 QQ群1: 541071512
