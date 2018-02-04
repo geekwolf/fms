@@ -13,7 +13,7 @@ from django.conf import settings
 
 def index(request):
 
-    request.breadcrumbs((('首页', '/'),('故障列表',reverse('fms_list')),('故障统计',reverse('dashboard_index'))))
+    request.breadcrumbs((('首页', '/'), ('故障列表', reverse('fms_list')), ('故障统计', reverse('dashboard_index'))))
     return render_to_response('dashboard/index.html', {'request': request})
 
 
@@ -83,35 +83,35 @@ def get_pie_history_data(data, item):
     return result
 
 
-def get_line_data(data,item):
+def get_line_data(data, item):
 
-        item_legend =  data.keys()
-        result = {}
-        item_data = []
-        now_month = datetime.datetime.now().month
+    item_legend = list(data.keys())
+    result = {}
+    item_data = []
+    now_month = datetime.datetime.now().month
 
-        xaxis_month = get_month()
-        for k,v in data.items():
-                _tmp = collections.OrderedDict()
-                for i in xaxis_month:
-                    if i in list(v.keys()):
-                        _tmp[i] = v[i]
-                    else:
-                        _tmp[i] = 0
-                per_item = {"name":k,"stack": '总量',"data":_tmp.values(),"type":'line'}
-                item_data.append(per_item)
+    xaxis_month = get_month()
+    for k, v in data.items():
+        _tmp = collections.OrderedDict()
+        for i in xaxis_month:
+            if i in list(v.keys()):
+                _tmp[i] = v[i]
+            else:
+                _tmp[i] = 0
+        per_item = {"name": k, "stack": '总量', "data": list(_tmp.values()), "type": 'line'}
+        item_data.append(per_item)
 
-        text = "今年故障统计"
-        if item == "fms_application_sum":
-                subtext = "针对业务故障类型"
-        elif item == "fms_sum":
-                subtext = "针对所有故障类型"
-        else:
-                pass
+    text = "今年故障统计"
+    if item == "fms_application_sum":
+        subtext = "针对业务故障类型"
+    elif item == "fms_sum":
+        subtext = "针对所有故障类型"
+    else:
+        pass
 
-        result = {"text":text,"subtext":subtext,"data": item_data,"legend": item_legend,"xaxis_data":xaxis_month,"type": 'line'}
+    result = {"text": text, "subtext": subtext, "data": item_data, "legend": item_legend, "xaxis_data": xaxis_month, "type": 'line'}
 
-        return result
+    return result
 
 
 def index_data(request):
@@ -147,8 +147,8 @@ def index_data(request):
     _year_sum = Content.objects.raw(
         'SELECT id,count(*) as count,project_id,DATE_FORMAT(ctime,"%%Y-%%m") as date from content_content where YEAR(ctime) = YEAR(CURDATE()) GROUP  by project_id,DATE_FORMAT(ctime,"%%Y-%%m")')
     # 针对业务故障，查询条件设置成该类型ID
-    _year_application_sum = Content.objects.raw('SELECT id,count(*) as count,project_id,DATE_FORMAT(ctime,"%%Y-%%m") as date from content_content where YEAR(ctime) = YEAR(CURDATE()) and type_id in {0} GROUP  by project_id,DATE_FORMAT(ctime,"%%Y-%%m")'.format(tuple(settings.SPECIAL_TYPES)))
-
+    _year_application_sum = Content.objects.raw(
+        'SELECT id,count(*) as count,project_id,DATE_FORMAT(ctime,"%%Y-%%m") as date from content_content where YEAR(ctime) = YEAR(CURDATE()) and type_id in {0} GROUP  by project_id,DATE_FORMAT(ctime,"%%Y-%%m")'.format(tuple(settings.SPECIAL_TYPES)))
 
     year_sum = collections.defaultdict(dict)
     year_application_sum = collections.defaultdict(dict)
@@ -171,7 +171,6 @@ def index_data(request):
     for k in history:
         data[k] = get_pie_history_data(content_history, k)
     data['project'] = project
-
     return HttpResponse(json.dumps(data))
 
 
