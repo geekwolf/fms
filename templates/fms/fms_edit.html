@@ -153,7 +153,9 @@ content:none;
     };
     date = new Date().Format("yyyy-MM-dd hh:mm");
 //默认显示当前时间
-    $(".form_datetime").val(date);
+    // $(".form_datetime").val(date);
+    $("#start_time").val('{{form.start_time.value|date:"Y-m-d H:i"}}');
+    $("#end_time").val('{{form.end_time.value|date:"Y-m-d H:i"}}');
 
 </script>
 
