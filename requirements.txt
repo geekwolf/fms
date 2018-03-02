@@ -4,3 +4,4 @@ django-paginator
 mysqlclient
 Pillow
 pyyaml
+pymysql
