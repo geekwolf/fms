@@ -1,32 +1,32 @@
 - model: content.Type
-  pk: 1
   fields:
+     id: 43ffc78d134c4189a4bee30aad406629
      name: '运营商故障'
 - model: content.Type
-  pk: 2
   fields:
+     id: 26bde8ed090d4c88ab33fa3fbe91f3dd
      name: '机房故障'
 - model: content.Type
-  pk: 3
   fields:
+     id: 41b88d29e598488bb485bdcd24190f88
      name: '流程/规范'
 - model: content.Type
-  pk: 4
   fields:
+     id: 8e7cf19d3621460da182a5168be8067e
      name: '第三方服务故障'
 - model: content.Type
-  pk: 5
   fields:
+     id: 55996610c481404ba75bfc0299ca5887
      name: 'SA变更'
 - model: content.Type
-  pk: 6
   fields:
+     id: f0f55e5b926b4a9f8759b16d4434ec6c
      name: '硬件故障'
 - model: content.Type
-  pk: 7
   fields:
+     id: 1b57670ea0ca46a0b98c981324f55cbb
      name: '业务程序故障'
 - model: content.Type
-  pk: 8
   fields:
+     id: 779c6ba2d2f64a4b836a5c1cd784e402
      name: '业务程序BUG'
