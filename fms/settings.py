@@ -27,7 +27,7 @@ SECRET_KEY = 'y2th+kwi1t&aj5c#&o-+%+prb2n6vewxs@$3y%731l7rf8yl%0'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-AUTH_USER_MODEL="accounts.User"
+AUTH_USER_MODEL = "accounts.User"
 
 # Application definition
 
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fms',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '123456',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -139,8 +139,8 @@ LOGIN_URL = '/accounts/login/'
 MEDIA_ROOT = 'uploads/'
 MEDIA_URL = 'uploads/'
 
-BREADCRUMBS_AUTO_HOME: True
-BREADCRUMBS_HOME_TITLE: u'Home'
+BREADCRUMBS_AUTO_HOME = True
+BREADCRUMBS_HOME_TITLE = u'Home'
 
 EMAIL_USE_TLS = False
 EMAIL_HOST = 'service.simlinux.com'
@@ -148,8 +148,17 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'admin@service.simlinux.com'
 EMAIL_HOST_PASSWORD = 'xxx'
 DEFAULT_FROM_EMAIL = 'geekwolf <admin@service.simlinux.com>'
-#要细分统计的故障类型ID
-SPECIAL_TYPES = [7,8]
+# 要细分统计的故障类型ID
+SPECIAL_TYPES = [7, 8]
 
-#邮件连接地址
+# 邮件连接地址
 EMAIL_DOMAIN_LINK = 'http://127.0.0.1'
+
+# Zabbix故障自动录入fms
+
+ZABBIX_AUTO_RECORD = True
+ZABBIX_DB_HOST = '192.168.104.152'
+ZABBIX_DB_PORT = '3306'
+ZABBIX_DB_USER = 'test'
+ZABBIX_DB_PASSWORD = 'geekwolf'
+ZABBIX_DB_NAME = 'zabbix'
