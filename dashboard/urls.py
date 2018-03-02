@@ -6,12 +6,15 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import url
-from dashboard import views 
+from dashboard import views, zbx
 
 urlpatterns = [
 
-    url(r'^$', views.index, name='dashboard_index'),
-    url(r'^index$', views.index_data,name='index_data'),
-    url(r'^select$', views.select_data,name='select_data'),
+    url(r'^cus$', views.index, name='cus_dashboard_index'),
+    url(r'^cus/index$', views.index_data, name='cus_index_data'),
+    url(r'^cus/select$', views.select_data, name='cus_select_data'),
 
+    url(r'^zbx$', zbx.index, name='zbx_dashboard_index'),
+    url(r'^zbx/index$', zbx.index_data, name='zbx_index_data'),
+    # url(r'^zbx/select$', zbx.select_data, name='zbx_select_data'),
 ]

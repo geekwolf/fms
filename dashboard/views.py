@@ -13,8 +13,8 @@ from django.conf import settings
 
 def index(request):
 
-    request.breadcrumbs((('首页', '/'), ('故障列表', reverse('fms_list')), ('故障统计', reverse('dashboard_index'))))
-    return render_to_response('dashboard/index.html', {'request': request})
+    request.breadcrumbs((('首页', '/'), ('故障列表', reverse('fms_list')), ('故障统计', reverse('cus_dashboard_index'))))
+    return render_to_response('dashboard/cus_index.html', {'request': request})
 
 
 def get_verbose_name(field):
@@ -69,7 +69,6 @@ def get_pie_data(data, item):
 
 
 def get_pie_history_data(data, item):
-
     result = {}
     item_data = []
     item_legend = []
