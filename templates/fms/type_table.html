@@ -1,9 +1,10 @@
- {% for i in form %}
+{% load accounts_tag %}
+{% for i in form %}
 <tr>
-    <td>{{ i.id }}</td>
+    <td>{{ i.id |split}} </td>
     <td id="type_name" data-name="{{ i.name }}">{{ i.name }}</td>
     <td>
-        <a href="{% url 'type_del' i.id %}" onclick="return confirm('确认删除角色吗？')" class="btn btn-xs btn-danger status role_del">删除</a>
+        <a href="/type/del/{{i.id|uuid_to_str}}" onclick="return confirm('确认删除角色吗？')" class="btn btn-xs btn-danger status role_del">删除</a>
     </td>
 </tr>
 {% endfor %}

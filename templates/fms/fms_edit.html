@@ -48,7 +48,7 @@ content:none;
             <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>添加故障</h5>
+                            <h5>编辑故障</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -132,7 +132,7 @@ content:none;
 
 <script type="text/javascript">
     $(".form_datetime").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:ss',
         minuteStep: 2,
         yearStart: 2017,
     });
@@ -151,11 +151,11 @@ content:none;
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     };
-    date = new Date().Format("yyyy-MM-dd hh:mm");
+    date = new Date().Format("yyyy-MM-dd hh:mm:ss");
 //默认显示当前时间
     // $(".form_datetime").val(date);
-    $("#start_time").val('{{form.start_time.value|date:"Y-m-d H:i"}}');
-    $("#end_time").val('{{form.end_time.value|date:"Y-m-d H:i"}}');
+    $("#start_time").val('{{form.start_time.value|date:"Y-m-d H:i:s"}}');
+    $("#end_time").val('{{form.end_time.value|date:"Y-m-d H:i:s"}}');
 
 </script>
 

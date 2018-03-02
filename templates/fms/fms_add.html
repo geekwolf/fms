@@ -131,7 +131,7 @@ content:none;
 
 <script type="text/javascript">
     $(".form_datetime").datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:ss',
         minuteStep: 2,
         yearStart: 2017,
     });
@@ -150,7 +150,7 @@ content:none;
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     };
-    date = new Date().Format("yyyy-MM-dd hh:mm");
+    date = new Date().Format("yyyy-MM-dd hh:mm:ss");
 //默认显示当前时间
     $(".form_datetime").val(date);
 

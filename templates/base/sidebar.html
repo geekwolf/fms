@@ -37,8 +37,12 @@
                             FMS
                         </div>
                     </li>
-                    <li class="active">
-                        <a href="{% url 'dashboard_index' %}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Dashboard</span></a>
+                    <li>
+                        <a href=""><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Dashboard</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href={% url 'cus_dashboard_index' %}>自定义故障</a></li>
+                            <li><a href={% url 'zbx_dashboard_index' %}>Zabbix故障</a></li>
+                        </ul>
                     </li>
 
                     <li>

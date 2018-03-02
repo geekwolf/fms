@@ -59,15 +59,46 @@
                 <td>{{content.project}}</td>
 
                 <td><b>故障状态:</b></td>
-                <td>{{content.get_status_display}}</td>
+
+                <td>
+                    {% if content.author == 'ZABBIX' %}
+                        {{content.status}}
+                    {% else %}
+                        {{content.get_status_display}}
+                    {% endif %}
+
+                </td>
+
+
             </tr>
             <tr>
                 <td><b>故障等级:</b></td>
-                <td>{{content.get_level_display}}</td>
+                <td>
+                    {% if content.author == 'ZABBIX' %}
+                        {{content.level}}
+                    {% else %}
+                        {{content.get_level_display}}
+                    {% endif %}
+                </td>
                 <td><b>创建者:</b></td>
-                <td>{{ content.author.fullname }}</td>
+                <td>
+                    {% if content.author == 'ZABBIX' %}
+                        {{content.author}}
+                    {% else %}
+                        {{ content.author.fullname }}
+                    {% endif %}
+
+                </td>
                 <td><b>主导改进方:</b></td>
-                <td>{{content.get_improve_display}}</td>
+                <td>
+                    {% if content.author == 'ZABBIX' %}
+                        {{content.improve}}
+                    {% else %}
+                        {{content.get_improve_display}}
+                    {% endif %}
+
+                
+                </td>
             </tr>
             <tr>
                 <td><b>故障类型:</b></td>
@@ -80,6 +111,10 @@
                 </td>
                 <td><b>影响时间:</b></td>
                 <td>{{ content.time }}</td>
+                {% if content.author == 'ZABBIX' %}
+                    <td><b>影响主机</b></td>
+                    <td>{{ content.host }}</td>
+                {% endif %}
 
             </tr>
         </tbody>

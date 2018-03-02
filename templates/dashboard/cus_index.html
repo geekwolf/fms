@@ -1,0 +1,119 @@
+{% extends 'base/base_site.html' %} 
+
+{% block content %}
+<div class="ibox-title">
+  <h5>统计报表</h5>
+</div>
+<div class="ibox-content">
+    <div class="row">
+
+    <div class="col-lg-4">
+    <div  id="fms_type" style="min-height:300px;"></div>
+    </div>
+    <div class="col-lg-4">
+    <div  id="fms_level" style="min-height:300px;"></div>
+    </div>
+    <div class="col-lg-4">
+    <div  id="fms_project" style="min-height:300px;"></div>
+    </div>
+
+    </div>
+
+    <div class="row">
+
+    <div class="col-lg-8">
+    <div  id="fms_sum" style="min-height:400px; margin-left:5px"></div>
+    </div>
+
+    <div class="col-lg-4">
+    <select class="form-control" id="type-project-list" style="width:150px;margin-left:250px">
+    </select>
+    <div  id="fms_type_history" style="min-height:300px;"></div>
+    </div>
+    </div>
+
+    <div class="row">
+
+    <div class="col-lg-8">
+    <div  id="fms_application_sum" style="min-height:400px; margin-left:5px"></div>
+    </div>
+
+</div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ block.super}}
+<script src="/static/js/plugins/echart/echarts.min.js"></script>
+<script src="/static/js/plugins/echart/pie.js"></script>
+<script src="/static/js/plugins/echart/line.js"></script>
+<script type="text/javascript">
+  $.ajax({
+        type: 'get', 
+        url: "{% url 'cus_index_data' %}",
+        dataType: 'json',
+        async: true,
+        success: function (result) {
+            if (result) {
+                $.each(result,function(k,v){
+                    if(v.type == "pie"){
+                        pie(k,v);
+                    }
+                    else if(v.type == "line"){
+                        line(k,v);
+                    }
+                    else{
+                        console.log('others');
+                    }
+                    if(k == "fms_type_history"){
+                        $('#type-project-list').append($('<option>',{
+                            value: 'All',
+                            text: 'All',
+                            selected:"selected",
+                        }));
+
+                        $.each(result.project,function(k,v){
+                            $('#type-project-list').append($('<option>',{
+                                value: v,
+                                text: v,
+                            }));
+                        })
+
+                    }
+                })
+            }            
+        },
+        error: function () { //请求失败
+            alert("Error");
+        }
+    });
+
+</script>
+
+<script type="text/javascript">
+    $('#type-project-list').change(function(){
+        var value=$(this).find("option:selected").text();
+        var data={"selected":value,"type":"project"};
+        $.ajax({
+            type: 'post', 
+            url: "{% url 'cus_select_data' %}",
+            data: data,
+            dataType: 'json',
+            async: true,
+            success: function (result) {
+                if (result) {
+                    $.each(result,function(k,v){
+                        if(v.type == "pie"){
+                            pie(k,v);
+                        }
+                    })
+                }            
+            },
+            error: function () { //请求失败
+                alert("Error");
+            }
+        });
+
+    })
+</script>
+{% endblock %}
