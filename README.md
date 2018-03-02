@@ -36,6 +36,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
 ```
 修改故障通知邮箱settings.py:
 
@@ -50,6 +51,17 @@ DEFAULT_FROM_EMAIL = 'geekwolf <admin@service.simlinux.com>'
 
 ```
 
+配置同步Zabbix 故障数据settings.py:
+```
+ZABBIX_AUTO_RECORD = True
+ZABBIX_DB_HOST = '192.168.104.152'
+ZABBIX_DB_PORT = '3306'
+ZABBIX_DB_USER = 'test'
+ZABBIX_DB_PASSWORD = 'geekwolf'
+ZABBIX_DB_NAME = 'zabbix'
+ZABBIX_SYNC_INTERVAL = 600  # 10分钟
+```
+
 ### 初始化数据
 ```
 python manage.py makemigrations
@@ -57,6 +69,12 @@ python manage.py migrate
 python manage.py loaddata default_types
 python manage.py loaddata default_user
 
+```
+
+### 启动同步进程
+```
+screen python manage.py zbxsync
+注释：若ZABBIX_AUTO_RECORD = False 可以忽略此步骤
 ```
 
 ### 登录
