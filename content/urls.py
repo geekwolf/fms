@@ -14,5 +14,4 @@ urlpatterns = [
     url(r'^edit$', views.fms_edit, name='fms_edit'),
     url(r'^detail/(?P<id>[a-zA-Z0-9]{32,32})$', views.fms_detail, name='fms_detail'),
     url(r'^search$', api.fms_search, name='fms_search'),
-    url(r'^geekwolf$', zbx.test)
 ]

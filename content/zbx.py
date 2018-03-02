@@ -2,7 +2,7 @@
 # @Author: Geekwolf
 # @Date:   2018-02-27 13:17:49
 # @Last Modified by:   Geekwolf
-# @Last Modified time: 2018-03-01 16:20:47
+# @Last Modified time: 2018-03-02 14:35:19
 from django.shortcuts import render_to_response, HttpResponse, render
 from commons.pymysql import query
 from django.conf import settings
@@ -99,25 +99,6 @@ def get_description(rec):
     return rx.sub(regex, description)
 
 
-# def multiple_replace(text, adict):
-#     rx = re.compile('|'.join(map(re.escape, adict)))
-#     print(rx)
-
-#     def one_xlat(match):
-#         print(match, '---')
-#         return adict[match.group(0)]
-
-#     # return one_xlat(text)
-#     return rx.sub(one_xlat, text)  # 每遇到一次匹配就会调用回调函数
-
-# # 把key做成了 |分割的内容，也就是正则表达式的OR
-# map1 = {'1': '2', '3': '4', 'ggg': 'test'}
-# # print('|'.join(map(re.escape, map1)))
-
-# str = '1133ggghhggg'
-# # print(multiple_replace(str, map1))
-
-
 def update_problem_data(problems):
 
     severity = severity_name()
@@ -148,18 +129,3 @@ def update_last_problem():
         eventids = ','.join([str(i.eventid) for i in _problem])
         problems = get_problem(status=0, eventids=eventids)
         update_problem_data(problems)
-
-
-def update_today_problem():
-    pass
-
-
-def test(request):
-
-    problems = get_problem(status=1)
-    if settings.ZABBIX_AUTO_RECORD:
-        # 先更新没有恢复的历史故障状态及时间
-        update_last_problem()
-        # 再更新当天故障状态
-        update_problem_data(problems)
-        return HttpResponse(problems)
