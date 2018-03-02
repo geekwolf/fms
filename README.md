@@ -11,6 +11,7 @@ FMS(Fault Management System: 运维故障管理系统)
 - 用户管理
 - 邮件管理
 - 统计Dashboard
+- 支持Zabbix故障数据及统计
 
 ## 部署
 
