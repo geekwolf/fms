@@ -149,7 +149,7 @@ EMAIL_HOST_USER = 'admin@service.simlinux.com'
 EMAIL_HOST_PASSWORD = 'xxx'
 DEFAULT_FROM_EMAIL = 'geekwolf <admin@service.simlinux.com>'
 # 要细分统计的故障类型ID
-SPECIAL_TYPES = [7, 8]
+SPECIAL_TYPES = ['1b57670ea0ca46a0b98c981324f55cbb', '779c6ba2d2f64a4b836a5c1cd784e402']
 
 # 邮件连接地址
 EMAIL_DOMAIN_LINK = 'http://127.0.0.1'
