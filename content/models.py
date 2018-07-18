@@ -98,7 +98,7 @@ class ZbxContent(models.Model):
     id = models.UUIDField(blank=True, primary_key=True, auto_created=True, default=uuid.uuid4)
     eventid = models.IntegerField(unique=True, verbose_name=u'事件ID')
     title = models.CharField(max_length=255, verbose_name=u'故障简述')
-    host = models.CharField(max_length=120, verbose_name='故障服务器', null=True)
+    host = models.CharField(max_length=120, verbose_name='故障服务器Top10', null=True)
     author = models.CharField(max_length=10, default='ZABBIX', verbose_name=u'ZBX用户')
     level = models.CharField(max_length=60, verbose_name=u'故障级别')
     type = models.CharField(max_length=120, verbose_name=u'zbx应用集', blank=True, null=True)
