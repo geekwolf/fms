@@ -111,15 +111,13 @@ def index_data(request):
 
     # 最近三个月数据
     for i in items_pie:
+        
+        _content = ZbxContent.objects.raw('SELECT id,%s as item,count(id) as count FROM content_zbxcontent WHERE DATE_SUB(CURDATE(), INTERVAL 3 MONTH) <= date(start_time) GROUP BY %s' % (i, i))
         #获取到top10的故障服务器
         if i=='host':
-            # _content = ZbxContent.objects.raw('SELECT id,%s as item,count(id) as count FROM content_zbxcontent WHERE DATE_SUB(CURDATE(), INTERVAL 3 MONTH) <= date(start_time) GROUP BY %s' % (i, i))
-            _content = ZbxContent.objects.raw('select * from (SELECT id,%s as item,count(id) as count FROM content_zbxcontent WHERE DATE_SUB(CURDATE(), INTERVAL 3 MONTH) <= date(start_time) GROUP BY %s) a order by count desc' % (i, i))
-            data[i] = get_pie_data(_content, i)
-            data[i]['data'] = data[i]['data'][0:10]
-        else:
-            _content = ZbxContent.objects.raw('SELECT id,%s as item,count(id) as count FROM content_zbxcontent WHERE DATE_SUB(CURDATE(), INTERVAL 3 MONTH) <= date(start_time) GROUP BY %s' % (i, i))
-            data[i] = get_pie_data(_content, i)
+            content = ZbxContent.objects.raw('select * from (SELECT id,%s as item,count(id) as count FROM content_zbxcontent WHERE DATE_SUB(CURDATE(), INTERVAL 3 MONTH) <= date(start_time) GROUP BY %s) a order by count desc' % (i, i))
+            _content = content[:10] if content
+        data[i] = get_pie_data(_content, i)
 
     # 根据故障项目分类，今年故障数量统计
     content_history = ZbxContent.objects.raw(
