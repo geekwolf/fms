@@ -116,7 +116,7 @@ def index_data(request):
         #获取到top10的故障服务器
         if i=='host':
             content = ZbxContent.objects.raw('select * from (SELECT id,%s as item,count(id) as count FROM content_zbxcontent WHERE DATE_SUB(CURDATE(), INTERVAL 3 MONTH) <= date(start_time) GROUP BY %s) a order by count desc' % (i, i))
-            _content = content[:10] if content
+            _content = content[:10] if content else []
         data[i] = get_pie_data(_content, i)
 
     # 根据故障项目分类，今年故障数量统计
